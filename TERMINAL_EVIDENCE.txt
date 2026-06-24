@@ -1,0 +1,147 @@
+# Lab 6 Terminal Evidence
+# cit411_utils Package — pip install -e . and verification
+# CIT 411 | Waqar Javed
+# Date: 2026-06-24
+
+==============================================================
+  STEP 1 — Package Installation (editable mode)
+==============================================================
+
+$ cd cit411_utils/
+$ pip install -e . --break-system-packages
+
+Obtaining file:///home/claude/cit411_utils
+  Installing build dependencies ... done
+  Checking if build backend supports build_editable ... done
+  Getting requirements to build editable ... done
+  Installing backend dependencies ... done
+  Preparing editable metadata ... done
+Requirement already satisfied: requests>=2.31.0 in ...
+Requirement already satisfied: pandas>=2.1.0 in ...
+Building wheels for collected packages: cit411_utils
+  Building editable for cit411_utils (pyproject.toml) ... done
+  Created wheel for cit411_utils: ...
+Successfully installed cit411_utils-0.1.0
+
+EXIT: 0
+
+==============================================================
+  STEP 2 — Verify import from any directory
+==============================================================
+
+$ python -c "from cit411_utils.cleaning import clean_email; print(clean_email('  Test@Example.COM  '))"
+VERIFY clean_email: test@example.com
+
+$ python -c "import cit411_utils; print('VERSION:', cit411_utils.__version__)"
+VERSION: 0.1.0
+
+==============================================================
+  STEP 3 — Test Suite (30/30 passed)
+==============================================================
+
+$ python -m pytest tests/ -v --no-header --tb=short
+
+tests/test_cit411_utils.py::TestCleanText::test_strips_whitespace        PASSED
+tests/test_cit411_utils.py::TestCleanText::test_collapses_internal_spaces PASSED
+tests/test_cit411_utils.py::TestCleanText::test_truncates                 PASSED
+tests/test_cit411_utils.py::TestCleanText::test_converts_non_str          PASSED
+tests/test_cit411_utils.py::TestCleanEmail::test_normalizes               PASSED
+tests/test_cit411_utils.py::TestCleanEmail::test_rejects_no_at            PASSED
+tests/test_cit411_utils.py::TestCleanEmail::test_rejects_multiple_at      PASSED
+tests/test_cit411_utils.py::TestCleanPhone::test_strips_formatting        PASSED
+tests/test_cit411_utils.py::TestCleanPhone::test_formatted_output         PASSED
+tests/test_cit411_utils.py::TestCleanPhone::test_strips_country_code      PASSED
+tests/test_cit411_utils.py::TestCleanPhone::test_rejects_short            PASSED
+tests/test_cit411_utils.py::TestCleanNumeric::test_strips_currency        PASSED
+tests/test_cit411_utils.py::TestCleanNumeric::test_plain_float            PASSED
+tests/test_cit411_utils.py::TestCleanNumeric::test_rejects_negative_when_disallowed PASSED
+tests/test_cit411_utils.py::TestCleanNumeric::test_rejects_non_numeric    PASSED
+tests/test_cit411_utils.py::TestValidateRow::test_valid                   PASSED
+tests/test_cit411_utils.py::TestValidateRow::test_missing_field           PASSED
+tests/test_cit411_utils.py::TestValidateRow::test_empty_value             PASSED
+tests/test_cit411_utils.py::TestCleanCsv::test_full_pipeline              PASSED
+tests/test_cit411_utils.py::TestSummarizeInventory::test_total_skus       PASSED
+tests/test_cit411_utils.py::TestSummarizeInventory::test_out_of_stock     PASSED
+tests/test_cit411_utils.py::TestSummarizeInventory::test_total_value      PASSED
+tests/test_cit411_utils.py::TestSummarizeInventory::test_missing_columns_raises PASSED
+tests/test_cit411_utils.py::TestFlagLowStock::test_flags_below_reorder   PASSED
+tests/test_cit411_utils.py::TestFlagLowStock::test_default_reorder_point PASSED
+tests/test_cit411_utils.py::TestTopMovers::test_returns_n                 PASSED
+tests/test_cit411_utils.py::TestTopMovers::test_sorted_by_line_value      PASSED
+tests/test_cit411_utils.py::TestTopMovers::test_invalid_rank_by_raises    PASSED
+tests/test_cit411_utils.py::TestInventoryReport::test_returns_string      PASSED
+tests/test_cit411_utils.py::TestInventoryReport::test_contains_header     PASSED
+
+Coverage:
+  src/cit411_utils/__init__.py       71%
+  src/cit411_utils/cleaning.py       90%
+  src/cit411_utils/inventory.py      94%
+  src/cit411_utils/weather.py         0%   (network calls — expected in CI)
+
+30 passed in 0.79s
+
+==============================================================
+  STEP 4 — help(cit411_utils) output
+==============================================================
+
+$ python -c "import cit411_utils; help(cit411_utils)"
+
+Help on package cit411_utils:
+
+NAME
+    cit411_utils
+
+DESCRIPTION
+    cit411_utils — CIT 411 Lab Utility Package
+    ===========================================
+
+    A consolidated Python utility package built during the CIT 411 course (Weeks 2-4).
+    Provides three functional submodules for common data-engineering tasks:
+
+    Submodules
+    ----------
+    cleaning
+        Data-cleaning helpers: normalize emails, strip whitespace, fix phone numbers,
+        validate rows, and clean an entire CSV file in one call.
+
+    weather
+        Weather-fetching helpers: retrieve current conditions and a multi-day forecast
+        from the Open-Meteo API (no API key required).
+
+    inventory
+        Inventory-analysis helpers: compute summary statistics, flag low-stock SKUs,
+        find the top N movers, and generate a printable markdown report.
+
+    Quick Start
+    -----------
+    >>> from cit411_utils.cleaning  import clean_email
+    >>> from cit411_utils.weather   import get_current_weather
+    >>> from cit411_utils.inventory import summarize_inventory
+
+    >>> clean_email("  Alice@Example.COM  ")
+    'alice@example.com'
+
+    Author
+    ------
+    Waqar Javed  <github.com/iamwaqarjaved>
+
+    License
+    -------
+    MIT
+
+PACKAGE CONTENTS
+    cleaning
+    inventory
+    weather
+
+DATA
+    __all__ = ['cleaning', 'weather', 'inventory']
+
+VERSION
+    0.1.0
+
+AUTHOR
+    Waqar Javed
+
+FILE
+    /home/claude/cit411_utils/src/cit411_utils/__init__.py

@@ -1,0 +1,15 @@
+# =============================================================================
+# requirements.txt — Runtime dependencies (pinned)
+# Install with: pip install -r requirements.txt
+# =============================================================================
+
+requests==2.32.3
+pandas==2.2.2
+numpy==1.26.4          # indirect — required by pandas
+python-dateutil==2.9.0 # indirect — required by pandas
+pytz==2024.1           # indirect — required by pandas
+tzdata==2024.1         # indirect — required by pandas (Windows / some Linux)
+urllib3==2.2.1         # indirect — required by requests
+certifi==2024.2.2      # indirect — required by requests
+charset-normalizer==3.3.2
+idna==3.7
