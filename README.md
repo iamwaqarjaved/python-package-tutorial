@@ -117,7 +117,7 @@ version         = "0.1.0"
 description     = "CIT 411 Lab Utility Package — data cleaning, weather, and inventory helpers"
 readme          = "README.md"
 license         = { text = "MIT" }
-authors         = [{ name = "Your Name", email = "you@example.com" }]
+authors         = [{ name = "Waqar Javed", email = "waqarjaved.com@gmail.com" }]
 requires-python = ">=3.10"
 
 dependencies = [
@@ -175,7 +175,7 @@ try:
 except PackageNotFoundError:
     __version__ = "0.0.0+dev"
 
-__author__ = "Your Name"
+__author__ = "Waqar Javed"
 __all__    = ["cleaning", "weather", "inventory"]
 ```
 
@@ -506,7 +506,7 @@ VERSION
     0.1.0
 
 AUTHOR
-    Your Name
+    Waqar Javed
 ```
 
 ---
