@@ -6,6 +6,14 @@
 
 ---
 
+## 📸 Test Results
+
+All 30 tests passing with 90–94% coverage on the core modules:
+
+![pytest results — 30 passed](assets/pytest_results.png)
+
+---
+
 ## 📚 What You'll Learn
 
 By the end of this tutorial you will be able to:
@@ -35,6 +43,9 @@ cit411_utils/
 │
 ├── tests/
 │   └── test_cit411_utils.py      ← 30-test pytest suite
+│
+├── assets/
+│   └── pytest_results.png        ← test evidence screenshot
 │
 ├── app.py                        ← consuming demo application
 ├── pyproject.toml                ← package metadata + build config
@@ -74,6 +85,7 @@ my_package/
 # Create the full layout in one command
 mkdir -p cit411_utils/src/cit411_utils
 mkdir -p cit411_utils/tests
+mkdir -p cit411_utils/assets
 cd cit411_utils
 ```
 
@@ -106,7 +118,7 @@ description     = "CIT 411 Lab Utility Package — data cleaning, weather, and i
 readme          = "README.md"
 license         = { text = "MIT" }
 authors         = [{ name = "Your Name", email = "you@example.com" }]
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 
 dependencies = [
     "requests>=2.31.0",
@@ -181,9 +193,7 @@ cit411_utils.cleaning — Data-Cleaning Helpers
 Functions for normalizing raw CSV/tabular data.
 """
 
-import re, unicodedata
-from pathlib import Path
-import csv
+import re
 from typing import Any
 
 
@@ -279,10 +289,10 @@ def get_current_weather(*, latitude: float, longitude: float) -> dict[str, Any]:
     code = int(cw.get("weathercode", 0))
     desc = _WMO_CODES.get(code, "Unknown")
     return {
-        "temperature": cw["temperature"],
-        "wind_speed":  cw["windspeed"],
+        "temperature":  cw["temperature"],
+        "wind_speed":   cw["windspeed"],
         "weather_desc": desc,
-        "description": f"{desc} | {cw['temperature']} °F | Wind: {cw['windspeed']} mph",
+        "description":  f"{desc} | {cw['temperature']} °F | Wind: {cw['windspeed']} mph",
     }
 ```
 
@@ -349,7 +359,6 @@ Normally `pip install .` copies your code into `site-packages`. With `-e`, pip i
 python -c "from cit411_utils.cleaning import clean_email; print(clean_email('  Test@Example.COM  '))"
 # → test@example.com
 
-# Check the version
 python -c "import cit411_utils; print(cit411_utils.__version__)"
 # → 0.1.0
 ```
@@ -434,20 +443,11 @@ Run the tests:
 # Install dev dependencies first
 pip install -r requirements-dev.txt
 
-# Run tests
+# Run all tests
 pytest -v
 
-# Run with coverage
+# Run with coverage report
 pytest -v --cov=cit411_utils --cov-report=term-missing
-```
-
-Expected output:
-
-```
-tests/test_cit411_utils.py::TestCleanEmail::test_normalizes    PASSED
-tests/test_cit411_utils.py::TestCleanEmail::test_rejects_no_at PASSED
-...
-30 passed in 0.79s
 ```
 
 ---
@@ -473,7 +473,7 @@ ruff==0.4.9
 mypy==1.10.0
 ```
 
-> The `-r requirements.txt` line on line 2 includes all runtime deps automatically — so a developer only runs one install command.
+> The `-r requirements.txt` line includes all runtime deps automatically — a developer only needs one install command.
 
 ---
 
@@ -526,24 +526,6 @@ AUTHOR
 
 ---
 
-## 📁 Complete File Listing
-
-All source files in this repo (click to view):
-
-```
-src/cit411_utils/__init__.py      ← package entry point + docstring
-src/cit411_utils/cleaning.py      ← data-cleaning helpers
-src/cit411_utils/weather.py       ← Open-Meteo weather helpers
-src/cit411_utils/inventory.py     ← pandas inventory analysis
-tests/test_cit411_utils.py        ← 30-test pytest suite
-app.py                            ← demo consuming application
-pyproject.toml                    ← package metadata + build config
-requirements.txt                  ← pinned runtime deps
-requirements-dev.txt              ← pinned dev deps
-```
-
----
-
 ## 🚀 Quick-Start (clone and run in 60 seconds)
 
 ```bash
@@ -553,8 +535,8 @@ cd python-package-tutorial
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 
-python app.py            # run the demo
-pytest -v                # run all 30 tests
+python app.py     # run the demo
+pytest -v         # run all 30 tests
 ```
 
 ---
