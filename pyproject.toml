@@ -11,7 +11,7 @@ version         = "0.1.0"
 description     = "CIT 411 Lab Utility Package — data cleaning, weather, and inventory helpers"
 readme          = "README.md"
 license         = { text = "MIT" }
-authors         = [{ name = "Waqar Javed", email = "waqarjaved.com@gmail.com" }]
+authors         = [{ name = "Your Name", email = "you@example.com" }]
 requires-python = ">=3.10"
 
 keywords = [

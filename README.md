@@ -6,11 +6,29 @@
 
 ---
 
-## 📸 Test Results
+## 📸 Screenshots
 
-All 30 tests passing with 90–94% coverage on the core modules:
+### ✅ Test Suite — 30 passed, 90–94% coverage
 
 ![pytest results — 30 passed](assets/pytest_results.png)
+
+---
+
+### 📦 Package Info & `help(cit411_utils)` output
+
+![help output and package metadata](assets/app_help_output.png)
+
+---
+
+### 🧹 Cleaning Module + 🌤️ Live Weather (Pembroke Pines, FL)
+
+![cleaning and weather module output](assets/app_cleaning_weather.png)
+
+---
+
+### 📊 Inventory Analysis — low-stock alerts, top movers, category breakdown
+
+![inventory module output](assets/app_inventory.png)
 
 ---
 
@@ -117,7 +135,7 @@ version         = "0.1.0"
 description     = "CIT 411 Lab Utility Package — data cleaning, weather, and inventory helpers"
 readme          = "README.md"
 license         = { text = "MIT" }
-authors         = [{ name = "Waqar Javed" }]
+authors         = [{ name = "Your Name", email = "you@example.com" }]
 requires-python = ">=3.10"
 
 dependencies = [
